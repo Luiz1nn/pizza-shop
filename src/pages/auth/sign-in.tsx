@@ -28,6 +28,15 @@ export function SignIn() {
   const handleSignIn = async (data: SignInSchema) => {
     try {
       await authenticate({ email: data.email })
+
+      toast.success('Enviamos um link de autenticação para seu e-amil.', {
+        action: {
+          label: 'Reenviar',
+          onClick: () => {
+            handleSignIn(data)
+          },
+        },
+      })
     } catch (error) {
       toast.error('Credenciais inválidas.')
     }
