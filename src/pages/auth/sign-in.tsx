@@ -56,7 +56,7 @@ export function SignIn() {
             <h1 className="text-2xl font-semibold tracking-tight">
               Acessar painel
             </h1>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-sm text-muted-foreground">
               Acompanhe suas vendas pelo painel do parceiro!
             </p>
           </div>
