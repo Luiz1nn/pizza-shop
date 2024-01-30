@@ -1,15 +1,16 @@
 import './global.css'
 
 import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { RouterProvider } from 'react-router-dom'
 
-import { AuthLayout } from './pages/_layouts/auth'
+import { router } from './routes'
 
 export function App() {
   return (
     <HelmetProvider>
       <Helmet titleTemplate="%s | pizza.shop" />
 
-      <AuthLayout />
+      <RouterProvider router={router} />
     </HelmetProvider>
   )
 }
