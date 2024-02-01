@@ -2,6 +2,7 @@ import { setupWorker } from 'msw/browser'
 
 import { env } from '~/env'
 
+import { getDayOrdersAmountMock } from './get-day-orders-amount-mock'
 import { getManagedRestaurantMock } from './get-managed-restaurant-mock'
 import { getMonthOrdersAmountMock } from './get-month-orders-amount-mock'
 import { getMonthRevenueMock } from './get-month-revenue-mock'
@@ -20,6 +21,7 @@ export const worker = setupWorker(
   updateProfileMock,
   getMonthRevenueMock,
   getMonthOrdersAmountMock,
+  getDayOrdersAmountMock,
 )
 
 export async function enableMSW() {
