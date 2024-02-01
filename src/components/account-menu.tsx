@@ -17,6 +17,8 @@ import {
 } from '~/components/ui/dropdown-menu'
 import { Skeleton } from '~/components/ui/skeleton'
 
+import { StoreProfileDialog } from './store-profile-dialog'
+
 export function AccountMenu() {
   const navigate = useNavigate()
 
@@ -92,6 +94,8 @@ export function AccountMenu() {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+
+      <StoreProfileDialog />
     </Dialog>
   )
 }
