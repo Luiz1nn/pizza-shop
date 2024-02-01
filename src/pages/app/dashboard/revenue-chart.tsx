@@ -1,4 +1,7 @@
+import { subDays } from 'date-fns'
 import { Loader2 } from 'lucide-react'
+import { useState } from 'react'
+import { DateRange } from 'react-day-picker'
 
 import {
   Card,
@@ -7,9 +10,15 @@ import {
   CardHeader,
   CardTitle,
 } from '~/components/ui/card'
+import { DateRangePicker } from '~/components/ui/date-range-picker'
 import { Label } from '~/components/ui/label'
 
 export function RevenueCart() {
+  const [dateRange, setDateRange] = useState<DateRange | undefined>({
+    from: subDays(new Date(), 7),
+    to: new Date(),
+  })
+
   return (
     <Card className="col-span-6">
       <CardHeader className="flex-row items-center justify-between pb-8">
@@ -22,6 +31,7 @@ export function RevenueCart() {
 
         <div className="flex items-center gap-3">
           <Label>Período</Label>
+          <DateRangePicker date={dateRange} onDateChange={setDateRange} />
         </div>
       </CardHeader>
       <CardContent>
