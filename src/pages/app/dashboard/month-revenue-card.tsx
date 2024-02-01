@@ -2,6 +2,8 @@ import { DollarSign } from 'lucide-react'
 
 import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card'
 
+import { MetricCardSkeleton } from './metric-card-skeleton'
+
 export function MonthRevenueCard() {
   return (
     <Card>
@@ -11,7 +13,9 @@ export function MonthRevenueCard() {
         </CardTitle>
         <DollarSign className="h-4 w-4 text-muted-foreground" />
       </CardHeader>
-      <CardContent></CardContent>
+      <CardContent>
+        <MetricCardSkeleton />
+      </CardContent>
     </Card>
   )
 }
