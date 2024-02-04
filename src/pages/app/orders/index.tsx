@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom'
 import { z } from 'zod'
 
 import { getOrders } from '~/api/get-orders'
+import { Pagination } from '~/components/pagination'
 import {
   Table,
   TableBody,
@@ -39,6 +40,14 @@ export function Orders() {
       }),
   })
 
+  const handlePaginate = (pageIndex: number) => {
+    setSearchParams((state) => {
+      state.set('page', (pageIndex + 1).toString())
+
+      return state
+    })
+  }
+
   return (
     <>
       <Helmet title="Pedidos" />
@@ -71,6 +80,15 @@ export function Orders() {
             </Table>
           </div>
           {isLoadingOrders && <OrderTableSkeleton />}
+
+          {result && (
+            <Pagination
+              onPageChange={handlePaginate}
+              pageIndex={result.meta.pageIndex}
+              totalCount={result.meta.totalCount}
+              perPage={result.meta.perPage}
+            />
+          )}
         </div>
       </div>
     </>
