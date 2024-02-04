@@ -4,9 +4,16 @@ import { useSearchParams } from 'react-router-dom'
 import { z } from 'zod'
 
 import { getOrders } from '~/api/get-orders'
-import { Table, TableHead, TableHeader, TableRow } from '~/components/ui/table'
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '~/components/ui/table'
 
 import { OrderTableFilter } from './order-table-filter'
+import { OrderTableRow } from './order-table-row'
 import { OrderTableSkeleton } from './order-table-skeleton'
 
 export function Orders() {
@@ -21,7 +28,7 @@ export function Orders() {
     .transform((page) => page - 1)
     .parse(searchParams.get('page' ?? '1'))
 
-  const { isLoading: isLoadingOrders } = useQuery({
+  const { data: result, isLoading: isLoadingOrders } = useQuery({
     queryKey: ['orders', pageIndex, orderId, customerName, status],
     queryFn: () =>
       getOrders({
@@ -55,6 +62,12 @@ export function Orders() {
                   <TableHead className="w-[132px]" />
                 </TableRow>
               </TableHeader>
+              <TableBody>
+                {result &&
+                  result.orders.map((order) => (
+                    <OrderTableRow key={order.orderId} order={order} />
+                  ))}
+              </TableBody>
             </Table>
           </div>
           {isLoadingOrders && <OrderTableSkeleton />}
