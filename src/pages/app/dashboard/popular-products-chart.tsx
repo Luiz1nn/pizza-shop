@@ -13,6 +13,7 @@ const COLORS = [
   colors.emerald[500],
   colors.rose[500],
 ]
+
 export function PopularProductsChart() {
   const { data: popularProducts } = useQuery({
     queryKey: ['metrics', 'popular-products'],
@@ -31,16 +32,18 @@ export function PopularProductsChart() {
       </CardHeader>
       <CardContent>
         {popularProducts ? (
-          <ResponsiveContainer>
-            <PieChart>
+          <ResponsiveContainer width="100%" height={240}>
+            <PieChart style={{ fontSize: 12 }}>
               <Pie
+                data={popularProducts}
+                nameKey="product"
                 dataKey="amount"
                 cx="50%"
                 cy="50%"
                 outerRadius={86}
                 innerRadius={64}
-                labelLine={false}
                 strokeWidth={8}
+                labelLine={false}
                 label={({
                   cx,
                   cy,
