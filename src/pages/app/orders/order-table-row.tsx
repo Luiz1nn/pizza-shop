@@ -3,6 +3,7 @@ import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { ArrowRight, Search, X } from 'lucide-react'
 
+import { approveOrder } from '~/api/approve-order'
 import { cancelOrder } from '~/api/cancel-order'
 import { GetOrdersResponse } from '~/api/get-orders'
 import { OrderStatus } from '~/components/order-status'
@@ -49,6 +50,14 @@ export function OrderTableRow({ order }: Props) {
       },
     })
 
+  const { mutateAsync: approveOrderFn, isPending: isApprovingOrder } =
+    useMutation({
+      mutationFn: approveOrder,
+      async onSuccess(_, { orderId }) {
+        updateOrderStatusOnCache(orderId, 'processing')
+      },
+    })
+
   return (
     <TableRow>
       <TableCell>
@@ -82,7 +91,12 @@ export function OrderTableRow({ order }: Props) {
       </TableCell>
       <TableCell>
         {order.status === 'pending' && (
-          <Button variant="outline" size="xs">
+          <Button
+            onClick={() => approveOrderFn({ orderId: order.orderId })}
+            disabled={isApprovingOrder}
+            variant="outline"
+            size="xs"
+          >
             <ArrowRight className="mr-2 h-3 w-3" />
             Aprovar
           </Button>
