@@ -5,7 +5,7 @@ import {
   ChevronsRight,
 } from 'lucide-react'
 
-import { Button } from './ui/button'
+import { Button } from '~/components/ui/button'
 
 type Props = {
   pageIndex: number
