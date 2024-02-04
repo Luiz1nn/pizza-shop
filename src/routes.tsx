@@ -5,7 +5,7 @@ import { AuthLayout } from './pages/_layouts/auth'
 import { Dashboard } from './pages/app/dashboard'
 import { Error } from './pages/app/error'
 import { SignIn } from './pages/auth/sign-in'
-import { SignUp } from './pages/auth/sing-up'
+import { SignUp } from './pages/auth/sign-up'
 
 export const router = createBrowserRouter([
   {

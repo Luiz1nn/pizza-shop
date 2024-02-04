@@ -76,7 +76,7 @@ export function PopularProductsChart() {
                   )
                 }}
               >
-                {popularProducts.map((_item, index) => {
+                {popularProducts?.map((_item, index) => {
                   return (
                     <Cell
                       key={`cell-${index}`}
