@@ -5,6 +5,7 @@ import { ArrowRight, Search, X } from 'lucide-react'
 
 import { approveOrder } from '~/api/approve-order'
 import { cancelOrder } from '~/api/cancel-order'
+import { deliverOrder } from '~/api/deliver-order'
 import { dispatchOrder } from '~/api/dispatch-order'
 import { GetOrdersResponse } from '~/api/get-orders'
 import { OrderStatus } from '~/components/order-status'
@@ -67,6 +68,14 @@ export function OrderTableRow({ order }: Props) {
       },
     })
 
+  const { mutateAsync: deliverOrderFn, isPending: isDeliveringOrder } =
+    useMutation({
+      mutationFn: deliverOrder,
+      async onSuccess(_, { orderId }) {
+        updateOrderStatusOnCache(orderId, 'delivered')
+      },
+    })
+
   return (
     <TableRow>
       <TableCell>
@@ -124,7 +133,12 @@ export function OrderTableRow({ order }: Props) {
         )}
 
         {order.status === 'delivering' && (
-          <Button variant="outline" size="xs">
+          <Button
+            onClick={() => deliverOrderFn({ orderId: order.orderId })}
+            disabled={isDeliveringOrder}
+            variant="outline"
+            size="xs"
+          >
             <ArrowRight className="mr-2 h-3 w-3" />
             Entregue
           </Button>
